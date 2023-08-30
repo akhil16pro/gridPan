@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: #fff;
+  --text-color: #edb046;
+  --grid-line: #00000011;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.05;
+
+  color: var(--text-color);
+  transition: color 1s;
+}
+
+main {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-size: 32px 32px;
+  background-image: linear-gradient(
+      to right,
+      var(--grid-line) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+
+  background-position: center center;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--background-color);
+
+    transition: backround-color 1s;
+    z-index: -5;
+  }
+}
+
+section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 3000px;
+  //height: 2400px;
+
+  display: grid;
+  padding: 20vh;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+  gap: 30vh;
+
+  touch-action: none;
+  @media only screen and (max-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 20vh;
+  }
+  a {
+    display: block;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    // max-width: 100%;
+    // max-height: 560px;
+    transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 0 16px #00000000;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+h1 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+
+  font-size: 120px;
+  white-space: nowrap;
+}
+body.hovered {
+  main {
+    &::before {
+      opacity: 0.1;
+      background-color: var(--text-color);
+    }
+  }
+  img {
+    opacity: 0.1;
+  }
+}
+
+body.hovered a.hovered img {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow: 0 0 16px #00000033;
+}
