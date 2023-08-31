@@ -3,9 +3,9 @@
   box-sizing: border-box; }
 
 :root {
-  --background-color: #fff;
+  --background-color: #000;
   --text-color: #edb046;
-  --grid-line: #00000011; }
+  --grid-line: #ffffff0f; }
 
 body {
   margin: 0;
@@ -61,7 +61,8 @@ section {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    background: var(--background-color); }
   section img {
     transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
     box-shadow: 0 0 16px #00000000;
@@ -87,8 +88,7 @@ h1 {
       font-size: 15vw; } }
 
 body.hovered main::before {
-  opacity: 0.1;
-  background-color: var(--text-color); }
+  opacity: 0.95; }
 body.hovered img {
   opacity: 0.1; }
 
