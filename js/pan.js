@@ -5,9 +5,25 @@ let aimY = 0.5
 let currentX = 0.5
 let currentY = 0.5
 
+const isTouchDevice = () => {
+  return (
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  )
+}
+
 const move = (event) => {
-  aimX = event.pageX / window.innerWidth
-  aimY = event.pageY / window.innerHeight
+  if (isTouchDevice()) {
+    console.log(event.changedTouches[0] != undefined, 'hh')
+    if (event.changedTouches[0] != undefined) {
+      aimX = event.changedTouches[0].pageX / window.innerWidth
+      aimY = event.changedTouches[0].pageY / window.innerHeight
+    }
+  } else {
+    aimX = event.pageX / window.innerWidth
+    aimY = event.pageY / window.innerHeight
+  }
 }
 
 const tween = (event) => {
@@ -16,14 +32,31 @@ const tween = (event) => {
 
   const sw = section.clientWidth - window.innerWidth
   const sh = section.clientHeight - window.innerHeight
-
-  section.style.transform = `translate(${-1 * sw * currentX}px,${
-    -1 * sh * currentY
-  }px)`
+  if (isTouchDevice()) {
+    section.style.transform = `translate(${-1 * sw * currentX}px,${
+      -1 * sh * currentY
+    }px)`
+  } else {
+    section.style.transform = `translate(${-1 * sw * currentX}px,${
+      -1 * sh * currentY
+    }px)`
+  }
 
   requestAnimationFrame(tween)
 }
 
-tween()
+const init = () => {
+  tween()
+  document.removeEventListener('mousemove', move)
+  document.removeEventListener('touchstart', move)
+  setTimeout(() => {
+    document.addEventListener('touchstart', move)
+    if (!isTouchDevice()) {
+      document.addEventListener('mousemove', move)
+    }
+  }, 100)
+}
 
-document.addEventListener('mousemove', move)
+window.onresize = init
+
+init()

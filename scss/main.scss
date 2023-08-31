@@ -52,7 +52,7 @@ section {
   position: fixed;
   top: 0;
   left: 0;
-  width: 3000px;
+  width: calc(100vw * 2);
   //height: 2400px;
 
   display: grid;
@@ -66,7 +66,13 @@ section {
   @media only screen and (max-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 20vh;
+    gap: 30vw;
+    width: calc(100vw * 3);
+  }
+  @media only screen and (max-width: 767px) {
+    gap: 18vw;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 18vw;
   }
   a {
     display: block;
@@ -95,8 +101,14 @@ h1 {
   z-index: 1;
   pointer-events: none;
 
-  font-size: 120px;
+  font-size: 10vw;
   white-space: nowrap;
+  @media only screen and (max-width: 980px) {
+    font-size: 12vw;
+  }
+  @media only screen and (max-width: 767px) {
+    font-size: 15vw;
+  }
 }
 body.hovered {
   main {
@@ -114,4 +126,19 @@ body.hovered a.hovered img {
   opacity: 1;
   transform: scale(1.15);
   box-shadow: 0 0 16px #00000033;
+  @media only screen and (max-width: 767px) {
+    transform: scale(1.05);
+  }
+}
+
+.credit {
+  position: fixed;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 15;
+  color: #7f7f7f;
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
 }

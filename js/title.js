@@ -8,7 +8,7 @@ links.forEach((link) => {
   link.addEventListener('mouseenter', () => {
     title.innerText = link.getAttribute('alt')
     const rI = Math.floor(Math.random() * 7)
-    console.log(color[rI])
+
     body.classList.add('hovered')
     link.classList.add('hovered')
 
